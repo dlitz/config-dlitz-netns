@@ -1,5 +1,5 @@
-config-dlitz-netns (0.0.0) UNRELEASED; urgency=medium
+config-dlitz-netns (0.0.1) dlitz-aptly; urgency=medium
 
   * Initial release.
 
- -- Darsey Litzenberger <dlitz@dlitz.net>  Sat, 18 Nov 2023 14:31:13 -0700
+ -- Darsey Litzenberger <dlitz@dlitz.net>  Sat, 18 Nov 2023 15:24:34 -0700
