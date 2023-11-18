@@ -1,5 +1,6 @@
+*.debhelper
+*.substvars
 /.debhelper/
-/config-dlitz-netns.substvars
 /config-dlitz-netns/
 /debhelper-build-stamp
 /files
