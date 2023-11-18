@@ -1,0 +1,42 @@
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA512
+
+Format: 1.8
+Date: Sat, 18 Nov 2023 15:26:38 MST
+Source: config-dlitz-netns
+Binary: config-dlitz-netns
+Architecture: source all
+Version: 0.0.1
+Distribution: dlitz-aptly
+Urgency: medium
+Maintainer: Darsey Litzenberger <dlitz@dlitz.net>
+Changed-By: Darsey Litzenberger <dlitz@dlitz.net>
+Description:
+ config-dlitz-netns - systemd unit files for creating network namespaces
+Checksums-Sha1:
+ ec63ceec49f4de7002bd3f302c62e21535502d31 994 config-dlitz-netns_0.0.1.dsc
+ 5cf4fa8733e361e3a77a01c3eace3baa78f8b592 2212 config-dlitz-netns_0.0.1.tar.xz
+ bfac4b2657296a55310c89396112ae259198ed01 3096 config-dlitz-netns_0.0.1_all.deb
+ 038c6da569b7577523393ca84b983b3c2ea22e5f 5275 config-dlitz-netns_0.0.1_amd64.buildinfo
+Checksums-Sha256:
+ 30d38e7ebbe7e757e6718d366151ffd23ca0b6f13a6867ec962da7acdaa4723e 994 config-dlitz-netns_0.0.1.dsc
+ 6567ef869cfaf438455b96095da888063f9b7604411c78a6d554dbbee16c8f6f 2212 config-dlitz-netns_0.0.1.tar.xz
+ b000f208235530bc72a73f1833a2ce379bd7eff07cd23ff778bf79da9d58d35f 3096 config-dlitz-netns_0.0.1_all.deb
+ c4c9da54e987801d67c8b678c586788bb7c2b12a16b0ec6c6a3de1c726e547ab 5275 config-dlitz-netns_0.0.1_amd64.buildinfo
+Changes:
+ config-dlitz-netns (0.0.1) dlitz-aptly; urgency=medium
+ .
+   * Initial release.
+Files:
+ cb512a22ee27808373951f098fde926d 994 admin optional config-dlitz-netns_0.0.1.dsc
+ 12e2ad07f8d786ce66970247fb375221 2212 admin optional config-dlitz-netns_0.0.1.tar.xz
+ 44facb59ef875b7c142593f20e08bdd5 3096 admin optional config-dlitz-netns_0.0.1_all.deb
+ 03876f76ca92990c6dd914ede419ec5f 5275 admin optional config-dlitz-netns_0.0.1_amd64.buildinfo
+
+-----BEGIN PGP SIGNATURE-----
+
+iIYEARYKAC4WIQTWkd0xNWtIORg6n8DjQLK2WJpUpAUCZVk6LhAcZGxpdHpAZGxp
+dHoubmV0AAoJEONAsrZYmlSkk8wBAOwirpEF6dpIVOip6gZp+/BAemBHvpwljPMv
+uLdhSOrnAQCvVRcTmfi0/SkILNPMrRidF4+NAJyltxBsEWzBEHfpBA==
+=7TYR
+-----END PGP SIGNATURE-----
