@@ -1,0 +1,7 @@
+[Unit]
+Description=ip-netns(8) network namespaces
+Documentation=man:ip-netns(8)
+Before=network.target
+
+[Install]
+WantedBy=network.target

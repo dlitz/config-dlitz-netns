@@ -1,0 +1,14 @@
+[Unit]
+Description=Create an ip-netns(8) network namespace in /run/netns/%I
+Documentation=man:ip-netns(8)
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStartPre=-/bin/sh -c 'if [ -e "/run/netns/$1" ]; then ip netns delete "$1" ; fi' -- %I
+ExecStart=ip netns add %I
+ExecStart=ip netns exec %I ip link set lo up
+ExecStop=ip netns delete %I
+
+[Install]
+WantedBy=netns.target
