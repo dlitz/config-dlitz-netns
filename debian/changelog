@@ -1,3 +1,10 @@
+config-dlitz-netns (0.0.2) dlitz-aptly; urgency=medium
+
+  * Move debian/README -> README.md so that it shows in GitHub
+  * Add units for configuring network interface inside the netns
+
+ -- Darsey Litzenberger <dlitz@dlitz.net>  Sat, 18 Nov 2023 19:37:16 -0700
+
 config-dlitz-netns (0.0.1) dlitz-aptly; urgency=medium
 
   * Initial release.
