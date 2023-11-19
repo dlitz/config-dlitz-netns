@@ -1,0 +1,43 @@
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA512
+
+Format: 1.8
+Date: Sat, 18 Nov 2023 19:40:59 MST
+Source: config-dlitz-netns
+Binary: config-dlitz-netns
+Architecture: source all
+Version: 0.0.2
+Distribution: dlitz-aptly
+Urgency: medium
+Maintainer: Darsey Litzenberger <dlitz@dlitz.net>
+Changed-By: Darsey Litzenberger <dlitz@dlitz.net>
+Description:
+ config-dlitz-netns - systemd unit files for creating network namespaces
+Checksums-Sha1:
+ 099c52dfe7d29d6cc56ff2ba6fcc4884128af600 994 config-dlitz-netns_0.0.2.dsc
+ b8e0635b0b9ef074a9f5b0cd8218c9474ac160cc 4056 config-dlitz-netns_0.0.2.tar.xz
+ ce5e5319fa225f58dd0bd6f45a5cf6d63c08d633 5236 config-dlitz-netns_0.0.2_all.deb
+ 94898e3df1230ec783fabbe9b959c6a4c69e2b0a 5275 config-dlitz-netns_0.0.2_amd64.buildinfo
+Checksums-Sha256:
+ dc2be3979e59a72f8f617ac6f10085549ee33c613873a312feb7f9c16dbb0702 994 config-dlitz-netns_0.0.2.dsc
+ 959a831b9585e584ef69ac7e7809c3ad2f986c360919f30c7d389d3641e24f70 4056 config-dlitz-netns_0.0.2.tar.xz
+ 681472d10e1979b4deee87bfbcedf327c41f174b4fde8232e948631245aa6c21 5236 config-dlitz-netns_0.0.2_all.deb
+ 3a863aa223291522806de43ec0753351d385b884db43476d42d614e549548f01 5275 config-dlitz-netns_0.0.2_amd64.buildinfo
+Changes:
+ config-dlitz-netns (0.0.2) dlitz-aptly; urgency=medium
+ .
+   * Move debian/README -> README.md so that it shows in GitHub
+   * Add units for configuring network interface inside the netns
+Files:
+ c1a35c132972387cdbc91b08f406e266 994 admin optional config-dlitz-netns_0.0.2.dsc
+ 82159c7b1ffba2423160e99279565bf4 4056 admin optional config-dlitz-netns_0.0.2.tar.xz
+ 2540e576ff6ca19993274a8fc85db9be 5236 admin optional config-dlitz-netns_0.0.2_all.deb
+ 47c6811278f68d3fb80ff6faabefb8e3 5275 admin optional config-dlitz-netns_0.0.2_amd64.buildinfo
+
+-----BEGIN PGP SIGNATURE-----
+
+iIYEARYKAC4WIQTWkd0xNWtIORg6n8DjQLK2WJpUpAUCZVl11RAcZGxpdHpAZGxp
+dHoubmV0AAoJEONAsrZYmlSkq1gBALuk++xTJkrH4FJYxMosgbvLSoNPq6I9Qn7L
+FHlWy5KYAP9zDJPBN1s+JazvV27StVY58G3RHdVox87e/1EoI6CHCg==
+=6OpI
+-----END PGP SIGNATURE-----
