@@ -14,5 +14,13 @@ Architecture: all
 Multi-Arch: foreign
 Depends:
  ${misc:Depends},
+ iproute2,
+ python3,
+Recommends:
+ ifupdown,
 Description: systemd unit files for creating network namespaces
- This installs the netns@.service for creating network namespaces.
+ This installs systemd services for creating network namespaces to be used by
+ other services:
+  * netns@<name>.service        - Creates network namespace
+  * netns-veth@<name>.service   - Creates virtual ethernet link to the netns
+  * netns-ifup@<name>.service   - Invokes ifupdown from inside the netns

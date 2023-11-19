@@ -1,0 +1,104 @@
+#!/usr/bin/env python3
+# dlitz 2008,2021
+
+import argparse
+import hashlib
+import json
+import os
+import subprocess
+import re
+import uuid
+
+# from <linux/if.h>
+IFNAMSIZ = 16
+ALTIFNAMSIZ = 128
+
+def get_app_specific_machine_id():
+    '''Get systemd app-specific machine-id for this machine'''
+    # app_id generated using `systemd-id128 -p new`
+    app_id = uuid.UUID('8f1880e6be92411eb6ff5a026c9876bf')
+    cmd = ['systemd-id128', '--app-specific=' + app_id.hex, 'machine-id']
+    output = subprocess.check_output(cmd).decode()
+    return uuid.UUID(output.rstrip())
+
+def validate_ifname(ifname):
+    ifname = str(ifname)
+    if not 1 <= len(ifname) < IFNAMSIZ:
+        raise ValueError('invalid ifname length')
+    illegal_chars = set(chr(c) for c in range(32)) | { ' ', '/' }
+    if illegal_chars & set(ifname):
+        raise ValueError('illegal interface name')
+    return ifname
+
+def clamp_macaddr(macaddr):
+    macaddr = macaddr.strip().replace(':', '')
+    if len(macaddr) != 12:
+        raise ValueError('illegal mac address')
+
+    a = bytearray.fromhex('%012x' % int(macaddr, 16))
+
+    # Clear multicast bit; set locally-administered bit
+    a[0] = a[0] & ~0x01 | 0x02
+
+    # My StarTech DS8100 switch looks at the wrong bits, so set those too.
+    a[0] = a[0] & ~0x80 | 0x40
+
+    # Repeat on the last octet, just in case some other equipment screws up too.
+    a[5] = a[5] & ~0x81 | 0x42
+
+    return ':'.join('%02x' % x for x in a)
+
+def generate_peer_macaddr(link_netns, peer_ifname, machine_id=None, associated_data=None):
+    # Generate the peer mac address, since udev on the host won't see it.
+    if machine_id is None:
+        machine_id = get_app_specific_machine_id()
+    if not associated_data:
+        associated_data = []
+    else:
+        associated_data = list(associated_data)
+    assert isinstance(machine_id, uuid.UUID), (type(machine_id), machine_id)
+    assert isinstance(link_netns, str), (type(peer_ifname), peer_ifname)
+    assert isinstance(peer_ifname, str), (type(link_netns), link_netns)
+    seed_data = (
+        ('version', 'b2dbb8d6981a45bc87e0d96576195cc0'),
+        ('machine-id', machine_id.hex),
+        ('link-netns', link_netns),
+        ('peer-ifname', peer_ifname),
+        ('associated-data', associated_data),
+    )
+    seed_bin = json.dumps(seed_data, separators=',:').encode()
+    hash_output = hashlib.shake_128(seed_bin).hexdigest(6)
+    return clamp_macaddr(hash_output)
+
+def parse_args():
+    parser = argparse.ArgumentParser(description='Generate a MAC address')
+    parser.add_argument('-a', '--associated-data', action='append',
+        help='add associated data (must be in specific order)')
+    parser.add_argument('-A', '--no-peer-hwaddr', action='store_true',
+        help="Don't set peer hwaddr")
+    parser.add_argument('host_ifname', help='name for the interface on the host')
+    parser.add_argument('link_netns', help='netns for the veth peer')
+    parser.add_argument('peer_ifname', help='name for the interface inside the netns')
+    args = parser.parse_args()
+    return args, parser
+
+def main():
+    args, parser = parse_args()
+
+    peer_macaddr = generate_peer_macaddr(
+        args.link_netns, args.peer_ifname, associated_data=args.associated_data)
+
+    cmd = [
+        'ip', 'link', 'add',
+            'name', args.host_ifname,
+            'link-netns', args.link_netns,
+            'type', 'veth',
+            'peer',
+                'name', args.peer_ifname,
+    ]
+    if not args.no_peer_hwaddr:
+        cmd += ['address', peer_macaddr]
+    subprocess.run(cmd, check=True)
+
+if __name__ == '__main__':
+    main()

@@ -1,0 +1,14 @@
+[Unit]
+Description=Network interface vn-%I for network namespace /run/netns/%I
+BindsTo=netns@%i.service
+After=netns@%i.service
+Before=netns-network@%i.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/usr/lib/config-dlitz-netns/add-netns-veth vn-%I %I host0
+ExecStop=ip link del dev vn-%I
+
+[Install]
+WantedBy=netns-network@%i.target

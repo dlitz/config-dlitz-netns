@@ -14,6 +14,13 @@ install:
 	mkdir -p $(DESTDIR)/lib/systemd/system
 	cp -t $(DESTDIR)/lib/systemd/system \
 		netns.target \
-		netns@.service
+		netns@.service \
+		netns-network@.target \
+		netns-ifup@.service \
+		netns-veth@.service
+
+	mkdir -p $(DESTDIR)/usr/lib/config-dlitz-netns
+	cp -t $(DESTDIR)/usr/lib/config-dlitz-netns \
+		add-netns-veth
 
 .PHONY: all install clean

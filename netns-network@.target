@@ -1,0 +1,4 @@
+[Unit]
+Description=Network namespace /run/netns/%I configured target
+BindsTo=netns@%i.service
+After=netns@%i.service

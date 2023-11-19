@@ -1,6 +1,8 @@
 [Unit]
-Description=Create an ip-netns(8) network namespace in /run/netns/%I
+Description=Network namespace /run/netns/%I
 Documentation=man:ip-netns(8)
+Before=netns-network@%i.target
+Wants=netns-network@%i.target
 
 [Service]
 Type=oneshot

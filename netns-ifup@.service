@@ -1,0 +1,15 @@
+[Unit]
+Description=Network namespace /run/netns/%I network configuration
+BindsTo=netns@%i.service
+After=netns@%i.service netns-veth@%i.service
+Before=netns-network@%i.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+NetworkNamespacePath=/run/netns/%I
+ExecStart=ifup --state-dir=/run/network.%I --interfaces=/etc/network/interfaces.%I -a
+ExecStop=ifdown --state-dir=/run/network.%I --interfaces=/etc/network/interfaces.%I -a
+
+[Install]
+WantedBy=netns-network@%i.target
